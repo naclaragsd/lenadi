@@ -24,12 +24,12 @@ Future versions will transform Lenadi into a complete study platform with Artifi
 
 ## 🎯 Version 1 Features
 
-- Subject management
-- Task management
-- Mark tasks as completed
-- Filter tasks by subject
-- Automatic study progress tracking
-- Automatic data storage using Local Storage
+- Subject management (CRUD)
+- Task management (CRUD)
+- Task filtering by subject and status
+- Task completion tracking
+- Automatic study progress calculation
+- Automatic data persistence using Local Storage
 
 ---
 
@@ -66,8 +66,8 @@ Upcoming documentation:
 
 - ✅ Project Planning
 - ✅ Initial Documentation
-- ⏳ Business Rules
-- ⏳ Use Cases
+- ✅Business Rules
+- ✅ Use Cases
 - ⏳ User Interface Prototype
 - ⏳ Version 1 Development
 - ⏳ Testing
@@ -79,14 +79,23 @@ Upcoming documentation:
 
 ## 📁 Project Structure
 
-```
+```text
 lenadi/
 │
 ├── docs/
-│   ├── Project Description
-│   ├── Objectives and Scope
-│   ├── Requirements
-│   └── ...
+│   ├── 01-project-description.md
+│   ├── 02-objectives-and-scope.md
+│   ├── 03-requirements.md
+│   ├── 04-business-rules.md
+│   └── 05-use-cases/
+│       ├── UC01-register-subject.md
+│       ├── UC02-edit-subject.md
+│       ├── UC03-delete-subject.md
+│       ├── UC04-register-task.md
+│       ├── UC05-edit-task.md
+│       ├── UC06-delete-task.md
+│       ├── UC07-complete-task.md
+│       └── UC08-filter-tasks.md
 │
 ├── src/
 │
@@ -97,7 +106,9 @@ lenadi/
 
 ## 💡 Why this project?
 
-This project is being developed not only as a study management platform but also as a way to apply Software Engineering practices in a real-world scenario.
+This project is being developed not only as a study management platform, but also as an opportunity to apply Software Engineering practices in a real-world scenario.
+
+The goal is not only to build a functional application, but also to simulate a professional software development process using industry best practices.
 
 Throughout its development, the project will include:
 

@@ -16,7 +16,7 @@
 
 **RF07** – The system shall allow users to mark a task as completed.
 
-**RF08** – The system shall allow users to filter tasks by subject.
+**RF08** – The system shall allow users to filter tasks by subject and status.
 
 **RF09** – The system shall automatically calculate the user's study progress.
 
