@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lenadi Study Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/lenadi.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar navigation works like simple app tabs. -->
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand-area">
+        <div class="future-logo-space" aria-hidden="true"></div>
+        <span class="brand-name">Lenadi</span>
+      </div>
+
+      <nav class="nav-list">
+        <button class="nav-item active" type="button" data-section="dashboard" aria-label="Dashboard" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="8" rx="2"></rect>
+              <rect x="14" y="3" width="7" height="5" rx="2"></rect>
+              <rect x="14" y="12" width="7" height="9" rx="2"></rect>
+              <rect x="3" y="15" width="7" height="6" rx="2"></rect>
+            </svg>
+          </span>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" type="button" data-section="subjects" aria-label="Subjects">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"></path>
+              <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"></path>
+            </svg>
+          </span>
+          <span>Subjects</span>
+        </button>
+        <button class="nav-item" type="button" data-section="tasks" aria-label="Tasks">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+              <path d="m8 10 2 2 4-4"></path>
+              <path d="M8 16h8"></path>
+            </svg>
+          </span>
+          <span>Tasks</span>
+        </button>
+        <button class="nav-item" type="button" data-section="progress" aria-label="Progress">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 19V5"></path>
+              <path d="M4 19h16"></path>
+              <path d="M8 16v-5"></path>
+              <path d="M12 16V8"></path>
+              <path d="M16 16v-3"></path>
+              <path d="m7 9 4-4 4 4 5-5"></path>
+            </svg>
+          </span>
+          <span>Progress</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-note">
+        <span class="small-label">Version 1</span>
+        <p>Simple study planning, calm progress, and organized routines.</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <!-- Dashboard screen -->
+      <section class="screen-section fade-in active-section" id="dashboard">
+        <div class="welcome-panel">
+          <div>
+            <p class="eyebrow">Study overview</p>
+            <h1>Welcome back to Lenadi</h1>
+            <p class="section-subtitle">Keep your subjects, tasks, and progress in one focused place.</p>
+          </div>
+          <button class="icon-button" type="button" aria-label="Sidebar collapse preview">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+
+        <div class="overall-card">
+          <div class="card-heading-row">
+            <div>
+              <p class="eyebrow">Overall progress</p>
+              <h2>68% completed</h2>
+            </div>
+            <span class="status-pill positive">On track</span>
+          </div>
+          <div class="progress-track large" aria-label="Overall progress 68 percent">
+            <span class="progress-fill purple" style="width: 68%;"></span>
+          </div>
+        </div>
+
+        <div class="summary-grid">
+          <article class="summary-card">
+            <span class="summary-marker lavender"></span>
+            <p>Total Subjects</p>
+            <strong>8</strong>
+          </article>
+          <article class="summary-card">
+            <span class="summary-marker sky"></span>
+            <p>Total Tasks</p>
+            <strong>42</strong>
+          </article>
+          <article class="summary-card">
+            <span class="summary-marker mint"></span>
+            <p>Completed Tasks</p>
+            <strong>29</strong>
+          </article>
+          <article class="summary-card">
+            <span class="summary-marker amber"></span>
+            <p>Pending Tasks</p>
+            <strong>13</strong>
+          </article>
+        </div>
+
+        <div class="content-grid two-columns">
+          <article class="card">
+            <div class="card-heading-row">
+              <h2>Today's Tasks</h2>
+              <span class="muted-count">4 items</span>
+            </div>
+            <ul class="task-preview-list">
+              <li>
+                <span class="checkbox-visual checked"></span>
+                <div>
+                  <strong>Review data structures</strong>
+                  <p>Programming - Today</p>
+                </div>
+              </li>
+              <li>
+                <span class="checkbox-visual"></span>
+                <div>
+                  <strong>Practice derivatives</strong>
+                  <p>Mathematics - Today</p>
+                </div>
+              </li>
+              <li>
+                <span class="checkbox-visual"></span>
+                <div>
+                  <strong>Read sprint planning notes</strong>
+                  <p>Software Engineering - Today</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+
+          <article class="card motivation-card">
+            <p class="eyebrow">Motivation</p>
+            <h2>Small study blocks still count.</h2>
+            <p>Consistency makes your academic routine lighter and easier to return to tomorrow.</p>
+          </article>
+        </div>
+
+        <div class="subject-overview-grid">
+          <article class="mini-subject-card purple-soft">
+            <span>Programming</span>
+            <strong>76%</strong>
+          </article>
+          <article class="mini-subject-card blue-soft">
+            <span>Mathematics</span>
+            <strong>58%</strong>
+          </article>
+          <article class="mini-subject-card green-soft">
+            <span>Engineering</span>
+            <strong>71%</strong>
+          </article>
+          <article class="mini-subject-card coral-soft">
+            <span>Networks</span>
+            <strong>64%</strong>
+          </article>
+        </div>
+      </section>
+
+      <!-- Subjects screen -->
+      <section class="screen-section fade-in" id="subjects" hidden>
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Subjects</p>
+            <h2>Organize your courses</h2>
+          </div>
+          <button class="primary-button" type="button" data-modal-target="subject-modal">Add Subject</button>
+        </div>
+
+        <div class="subject-card-grid">
+          <article class="subject-card">
+            <span class="subject-color-dot purple-dot"></span>
+            <h3>Programming</h3>
+            <p>12 tasks - 9 completed</p>
+            <div class="progress-row">
+              <span>75%</span>
+              <div class="progress-track"><span class="progress-fill purple" style="width: 75%;"></span></div>
+            </div>
+            <div class="card-actions">
+              <button type="button">Edit</button>
+              <button type="button" class="danger-button">Delete</button>
+            </div>
+          </article>
+          <article class="subject-card">
+            <span class="subject-color-dot blue-dot"></span>
+            <h3>Mathematics</h3>
+            <p>10 tasks - 6 completed</p>
+            <div class="progress-row">
+              <span>60%</span>
+              <div class="progress-track"><span class="progress-fill blue" style="width: 60%;"></span></div>
+            </div>
+            <div class="card-actions">
+              <button type="button">Edit</button>
+              <button type="button" class="danger-button">Delete</button>
+            </div>
+          </article>
+          <article class="subject-card">
+            <span class="subject-color-dot green-dot"></span>
+            <h3>Software Engineering</h3>
+            <p>8 tasks - 5 completed</p>
+            <div class="progress-row">
+              <span>63%</span>
+              <div class="progress-track"><span class="progress-fill green" style="width: 63%;"></span></div>
+            </div>
+            <div class="card-actions">
+              <button type="button">Edit</button>
+              <button type="button" class="danger-button">Delete</button>
+            </div>
+          </article>
+          <article class="subject-card">
+            <span class="subject-color-dot coral-dot"></span>
+            <h3>Networks</h3>
+            <p>7 tasks - 4 completed</p>
+            <div class="progress-row">
+              <span>57%</span>
+              <div class="progress-track"><span class="progress-fill coral" style="width: 57%;"></span></div>
+            </div>
+            <div class="card-actions">
+              <button type="button">Edit</button>
+              <button type="button" class="danger-button">Delete</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Add subject modal: visual only, with no save behavior yet. -->
+        <div class="modal-overlay" id="subject-modal" aria-label="Add subject modal" hidden>
+          <div class="modal-card">
+            <div class="modal-header">
+              <h3>Add Subject</h3>
+              <button class="modal-close" type="button" data-modal-close aria-label="Close add subject modal">x</button>
+            </div>
+            <label>Subject name<input type="text" placeholder="Example: Biology"></label>
+            <div class="form-group">
+              <span>Subject color</span>
+              <div class="color-options">
+                <span class="color-choice purple-dot"></span>
+                <span class="color-choice blue-dot"></span>
+                <span class="color-choice green-dot"></span>
+                <span class="color-choice coral-dot"></span>
+                <span class="color-choice amber-dot"></span>
+                <span class="color-choice teal-dot"></span>
+                <span class="color-choice stone-dot"></span>
+              </div>
+            </div>
+            <label>Icon <select><option>Select an icon</option></select></label>
+            <div class="modal-actions">
+              <button type="button" data-modal-close>Cancel</button>
+              <button type="button" class="primary-button">Save</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tasks screen -->
+      <section class="screen-section fade-in" id="tasks" hidden>
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Tasks</p>
+            <h2>Plan the next study steps</h2>
+          </div>
+          <button class="primary-button" type="button" data-modal-target="task-modal">Add Task</button>
+        </div>
+
+        <div class="filter-bar">
+          <label>Subject<select><option>All subjects</option></select></label>
+          <label>Status<select><option>All statuses</option></select></label>
+        </div>
+
+        <div class="task-list">
+          <article class="task-item">
+            <span class="checkbox-visual checked"></span>
+            <div class="task-main">
+              <h3>Finish recursion exercises</h3>
+              <span class="subject-label purple-label">Programming</span>
+            </div>
+            <span class="due-date">Jul 05</span>
+            <span class="status-pill positive">Completed</span>
+            <button type="button">Edit</button>
+            <button type="button" class="danger-button">Delete</button>
+          </article>
+          <article class="task-item">
+            <span class="checkbox-visual"></span>
+            <div class="task-main">
+              <h3>Study linear algebra chapter</h3>
+              <span class="subject-label blue-label">Mathematics</span>
+            </div>
+            <span class="due-date">Jul 08</span>
+            <span class="status-pill pending">Pending</span>
+            <button type="button">Edit</button>
+            <button type="button" class="danger-button">Delete</button>
+          </article>
+          <article class="task-item">
+            <span class="checkbox-visual"></span>
+            <div class="task-main">
+              <h3>Prepare network protocol notes</h3>
+              <span class="subject-label coral-label">Networks</span>
+            </div>
+            <span class="due-date">Jul 10</span>
+            <span class="status-pill pending">Pending</span>
+            <button type="button">Edit</button>
+            <button type="button" class="danger-button">Delete</button>
+          </article>
+        </div>
+
+        <!-- Add task modal: visual only, with no save behavior yet. -->
+        <div class="modal-overlay" id="task-modal" aria-label="Add task modal" hidden>
+          <div class="modal-card">
+            <div class="modal-header">
+              <h3>Add Task</h3>
+              <button class="modal-close" type="button" data-modal-close aria-label="Close add task modal">x</button>
+            </div>
+            <label>Task title<input type="text" placeholder="Example: Read chapter 3"></label>
+            <label>Subject<select><option>Select a subject</option><option>Programming</option></select></label>
+            <label>Due date<input type="date"></label>
+            <label>Description <span class="optional-text">(optional)</span><textarea placeholder="Add more details..."></textarea></label>
+            <div class="modal-actions">
+              <button type="button" data-modal-close>Cancel</button>
+              <button type="button" class="primary-button">Save</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Progress screen -->
+      <section class="screen-section fade-in" id="progress" hidden>
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Progress</p>
+            <h2>Track study momentum</h2>
+          </div>
+        </div>
+
+        <article class="overall-card">
+          <div class="card-heading-row">
+            <div>
+              <p class="eyebrow">Total completion</p>
+              <h2>68% overall</h2>
+            </div>
+            <strong class="large-number">29/42</strong>
+          </div>
+          <div class="progress-track large"><span class="progress-fill purple" style="width: 68%;"></span></div>
+        </article>
+
+        <div class="progress-layout">
+          <article class="card">
+            <h2>Progress by subject</h2>
+            <div class="subject-progress-list">
+              <div class="subject-progress-item">
+                <div><strong>Programming</strong><span>9 completed - 3 pending</span></div>
+                <b>75%</b>
+                <div class="progress-track"><span class="progress-fill purple" style="width: 75%;"></span></div>
+              </div>
+              <div class="subject-progress-item">
+                <div><strong>Mathematics</strong><span>6 completed - 4 pending</span></div>
+                <b>60%</b>
+                <div class="progress-track"><span class="progress-fill blue" style="width: 60%;"></span></div>
+              </div>
+              <div class="subject-progress-item">
+                <div><strong>Software Engineering</strong><span>5 completed - 3 pending</span></div>
+                <b>63%</b>
+                <div class="progress-track"><span class="progress-fill green" style="width: 63%;"></span></div>
+              </div>
+              <div class="subject-progress-item">
+                <div><strong>Networks</strong><span>4 completed - 3 pending</span></div>
+                <b>57%</b>
+                <div class="progress-track"><span class="progress-fill coral" style="width: 57%;"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <div class="stats-column">
+            <article class="summary-card wide">
+              <p>Best subject</p>
+              <strong>Programming</strong>
+            </article>
+            <article class="summary-card wide">
+              <p>This week</p>
+              <strong>11 tasks</strong>
+            </article>
+            <article class="summary-card wide">
+              <p>Pending focus</p>
+              <strong>Mathematics</strong>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="src/js/lenadi.js"></script>
+</body>
+</html>
