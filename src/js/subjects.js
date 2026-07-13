@@ -1,9 +1,5 @@
-// Lenadi dashboard interactions.
-// Handles app-like navigation, modal visibility, and subject management.
-
-const STORAGE_KEYS = {
-  subjects: "subjects",
-};
+import { closeAllModals, openModal } from "./modal.js";
+import { loadSubjects, saveSubjects } from "./storage.js";
 
 const COLOR_CLASSES = {
   "purple-dot": "purple",
@@ -16,15 +12,15 @@ const COLOR_CLASSES = {
 };
 
 const elements = {
-  navItems: document.querySelectorAll(".nav-item"),
-  sections: document.querySelectorAll(".screen-section"),
-  modalOpenButtons: document.querySelectorAll("[data-modal-target]"),
-  modalCloseButtons: document.querySelectorAll("[data-modal-close]"),
-  modals: document.querySelectorAll(".modal-overlay"),
-  subjectModal: document.querySelector("#subject-modal"),
-  subjectNameInput: document.querySelector("#subject-modal input[type='text']"),
-  subjectColorButtons: document.querySelectorAll("#subject-modal .color-choice"),
-  saveSubjectButton: document.querySelector("#save-subject-button"),
+  subjectNameInput: document.querySelector(
+    "#subject-modal input[type='text']"
+  ),
+  subjectColorButtons: document.querySelectorAll(
+    "#subject-modal .color-choice"
+  ),
+  saveSubjectButton: document.querySelector(
+    "#save-subject-button"
+  ),
   subjectsGrid: document.querySelector(".subject-card-grid"),
 };
 
@@ -32,78 +28,7 @@ let subjects = [];
 let selectedColor = "purple";
 let editingSubjectId = null;
 
-// ---------- Shared modal helpers ----------
-
-function closeAllModals() {
-  elements.modals.forEach((modal) => {
-    modal.hidden = true;
-  });
-}
-
-function openModal(modalId) {
-  const modal = document.getElementById(modalId);
-
-  if (modal) {
-    modal.hidden = false;
-  }
-}
-
-// ---------- Navigation ----------
-
-function activateSection(selectedSectionId) {
-  elements.sections.forEach((section) => {
-    const isSelected = section.id === selectedSectionId;
-
-    section.hidden = !isSelected;
-    section.classList.toggle("active-section", isSelected);
-  });
-}
-
-function activateNavItem(selectedItem) {
-  elements.navItems.forEach((navItem) => {
-    navItem.classList.remove("active");
-    navItem.removeAttribute("aria-current");
-  });
-
-  selectedItem.classList.add("active");
-  selectedItem.setAttribute("aria-current", "page");
-}
-
-function setupNavigation() {
-  elements.navItems.forEach((item) => {
-    item.addEventListener("click", () => {
-      closeAllModals();
-      activateSection(item.dataset.section);
-      activateNavItem(item);
-    });
-  });
-}
-
-// ---------- Subject storage ----------
-
-function saveSubjects() {
-  localStorage.setItem(STORAGE_KEYS.subjects, JSON.stringify(subjects));
-}
-
-function loadSubjects() {
-  const savedSubjects = localStorage.getItem(STORAGE_KEYS.subjects);
-
-  if (savedSubjects) {
-    subjects = JSON.parse(savedSubjects);
-  }
-}
-
 // ---------- Subject form state ----------
-
-function setSelectedColor(colorName) {
-  selectedColor = colorName;
-
-  elements.subjectColorButtons.forEach((button) => {
-    const buttonColor = getColorFromButton(button);
-
-    button.classList.toggle("is-selected", buttonColor === selectedColor);
-  });
-}
 
 function getColorFromButton(button) {
   const colorClass = Object.keys(COLOR_CLASSES).find((className) => {
@@ -113,7 +38,20 @@ function getColorFromButton(button) {
   return COLOR_CLASSES[colorClass] || "purple";
 }
 
-function resetSubjectForm() {
+function setSelectedColor(colorName) {
+  selectedColor = colorName;
+
+  elements.subjectColorButtons.forEach((button) => {
+    const buttonColor = getColorFromButton(button);
+
+    button.classList.toggle(
+      "is-selected",
+      buttonColor === selectedColor
+    );
+  });
+}
+
+export function resetSubjectForm() {
   if (elements.subjectNameInput) {
     elements.subjectNameInput.value = "";
   }
@@ -123,14 +61,15 @@ function resetSubjectForm() {
 }
 
 function openSubjectEditor(subject) {
-  if (!elements.subjectNameInput || !elements.subjectModal) {
+  if (!elements.subjectNameInput) {
     return;
   }
 
   elements.subjectNameInput.value = subject.name;
   editingSubjectId = subject.id;
+
   setSelectedColor(subject.color);
-  elements.subjectModal.hidden = false;
+  openModal("subject-modal");
 }
 
 // ---------- Subject rendering ----------
@@ -139,7 +78,8 @@ function createEmptySubjectsMessage() {
   const emptyMessage = document.createElement("p");
 
   emptyMessage.textContent =
-    "No subjects yet 📚 Create your first subject and start organizing your studies.";
+    "No subjects yet. Create your first subject and start organizing your studies.";
+
   emptyMessage.classList.add("empty-message");
 
   return emptyMessage;
@@ -150,25 +90,36 @@ function createSubjectCard(subject) {
   const colorDot = document.createElement("span");
   const title = document.createElement("h3");
   const details = document.createElement("p");
+
   const progressRow = document.createElement("div");
   const progressText = document.createElement("span");
   const progressTrack = document.createElement("div");
   const progressFill = document.createElement("span");
+
   const actions = document.createElement("div");
   const editButton = document.createElement("button");
   const deleteButton = document.createElement("button");
 
   card.classList.add("subject-card");
 
-  colorDot.classList.add("subject-color-dot", `${subject.color}-dot`);
+  colorDot.classList.add(
+    "subject-color-dot",
+    `${subject.color}-dot`
+  );
 
   title.textContent = subject.name;
   details.textContent = "0 tasks - 0 completed";
 
   progressRow.classList.add("progress-row");
   progressText.textContent = "0%";
+
   progressTrack.classList.add("progress-track");
-  progressFill.classList.add("progress-fill", subject.color);
+
+  progressFill.classList.add(
+    "progress-fill",
+    subject.color
+  );
+
   progressFill.style.width = "0%";
 
   progressTrack.appendChild(progressFill);
@@ -178,6 +129,7 @@ function createSubjectCard(subject) {
 
   editButton.type = "button";
   editButton.textContent = "Edit";
+
   editButton.addEventListener("click", () => {
     editSubject(subject.id);
   });
@@ -185,12 +137,20 @@ function createSubjectCard(subject) {
   deleteButton.type = "button";
   deleteButton.textContent = "Delete";
   deleteButton.classList.add("danger-button");
+
   deleteButton.addEventListener("click", () => {
     deleteSubject(subject.id);
   });
 
   actions.append(editButton, deleteButton);
-  card.append(colorDot, title, details, progressRow, actions);
+
+  card.append(
+    colorDot,
+    title,
+    details,
+    progressRow,
+    actions
+  );
 
   return card;
 }
@@ -203,16 +163,21 @@ function renderSubjects() {
   elements.subjectsGrid.innerHTML = "";
 
   if (subjects.length === 0) {
-    elements.subjectsGrid.appendChild(createEmptySubjectsMessage());
+    elements.subjectsGrid.appendChild(
+      createEmptySubjectsMessage()
+    );
+
     return;
   }
 
   subjects.forEach((subject) => {
-    elements.subjectsGrid.appendChild(createSubjectCard(subject));
+    const subjectCard = createSubjectCard(subject);
+
+    elements.subjectsGrid.appendChild(subjectCard);
   });
 }
 
-// ---------- Subject actions ----------
+// ---------- Subject validation ----------
 
 function getSubjectNameFromForm() {
   if (!elements.subjectNameInput) {
@@ -224,12 +189,17 @@ function getSubjectNameFromForm() {
 
 function subjectNameExists(subjectName) {
   return subjects.some((subject) => {
-    const isSameName = subject.name.toLowerCase() === subjectName.toLowerCase();
-    const isDifferentSubject = subject.id !== editingSubjectId;
+    const isSameName =
+      subject.name.toLowerCase() === subjectName.toLowerCase();
+
+    const isDifferentSubject =
+      subject.id !== editingSubjectId;
 
     return isSameName && isDifferentSubject;
   });
 }
+
+// ---------- Subject actions ----------
 
 function addSubject() {
   const subjectName = getSubjectNameFromForm();
@@ -243,13 +213,15 @@ function addSubject() {
     return;
   }
 
-  subjects.push({
+  const newSubject = {
     id: Date.now(),
     name: subjectName,
     color: selectedColor,
-  });
+  };
 
-  saveSubjects();
+  subjects.push(newSubject);
+
+  saveSubjects(subjects);
   renderSubjects();
   closeAllModals();
   resetSubjectForm();
@@ -278,14 +250,16 @@ function updateSubject() {
   subject.name = subjectName;
   subject.color = selectedColor;
 
-  saveSubjects();
+  saveSubjects(subjects);
   renderSubjects();
   closeAllModals();
   resetSubjectForm();
 }
 
 function deleteSubject(subjectId) {
-  const confirmDelete = confirm("Are you sure you want to delete this subject?");
+  const confirmDelete = confirm(
+    "Are you sure you want to delete this subject?"
+  );
 
   if (!confirmDelete) {
     return;
@@ -295,7 +269,7 @@ function deleteSubject(subjectId) {
     return subject.id !== subjectId;
   });
 
-  saveSubjects();
+  saveSubjects(subjects);
   renderSubjects();
 }
 
@@ -318,58 +292,32 @@ function saveSubjectFromForm() {
   updateSubject();
 }
 
-// ---------- Event listeners ----------
-
-function setupModals() {
-  elements.modalOpenButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      openModal(button.dataset.modalTarget);
-    });
-  });
-
-  elements.modalCloseButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      closeAllModals();
-      resetSubjectForm();
-    });
-  });
-
-  elements.modals.forEach((modal) => {
-    modal.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        modal.hidden = true;
-        resetSubjectForm();
-      }
-    });
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeAllModals();
-      resetSubjectForm();
-    }
-  });
-}
+// ---------- Subject event listeners ----------
 
 function setupSubjectForm() {
   if (elements.saveSubjectButton) {
-    elements.saveSubjectButton.addEventListener("click", saveSubjectFromForm);
+    elements.saveSubjectButton.addEventListener(
+      "click",
+      saveSubjectFromForm
+    );
   }
 
   elements.subjectColorButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      setSelectedColor(getColorFromButton(button));
+      const selectedButtonColor =
+        getColorFromButton(button);
+
+      setSelectedColor(selectedButtonColor);
     });
   });
 }
 
-function initLenadi() {
-  setupNavigation();
-  setupModals();
+// ---------- Subject initialization ----------
+
+export function initSubjects() {
+  subjects = loadSubjects();
+
   setupSubjectForm();
-  loadSubjects();
   setSelectedColor(selectedColor);
   renderSubjects();
 }
-
-initLenadi();
