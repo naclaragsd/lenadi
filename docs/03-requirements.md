@@ -20,6 +20,7 @@
 
 **RF09** – The system shall automatically calculate the user's study progress.
 
+**RF10** – The system shall allow users to view the complete details of a registered task.
 ---
 
 ## Non-Functional Requirements

@@ -21,6 +21,7 @@ The first version of Lenadi includes the following features:
 * Subject deletion.
 * Task registration.
 * Task editing.
+* View task details.
 * Task deletion.
 * Mark tasks as completed.
 * Filter tasks by subject.

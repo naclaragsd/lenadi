@@ -867,3 +867,42 @@ textarea {
     padding: 12px;
   }
 }
+
+.task-main {
+  cursor: pointer;
+}
+
+.task-main:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.task-details-content {
+  display: grid;
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.task-detail-group {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.task-detail-group > span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.65;
+}
+
+.task-detail-group p,
+.task-detail-group strong {
+  margin: 0;
+}
+
+.task-detail-description {
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
