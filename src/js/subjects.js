@@ -1,19 +1,22 @@
 import { closeAllModals, openModal } from "./modal.js";
-import { loadSubjects, saveSubjects } from "./storage.js";
-
-const COLOR_CLASSES = {
-  "purple-dot": "purple",
-  "blue-dot": "blue",
-  "green-dot": "green",
-  "coral-dot": "coral",
-  "amber-dot": "amber",
-  "teal-dot": "teal",
-  "stone-dot": "stone",
-};
+import {
+  notifyDataUpdated,
+  onDataUpdated,
+} from "./events.js";
+import {
+  loadSubjects,
+  loadTasks,
+  saveSubjects,
+  saveTasks,
+} from "./storage.js";
+import { getSubjectStats } from "./stats.js";
 
 const elements = {
   subjectNameInput: document.querySelector(
-    "#subject-modal input[type='text']"
+    "#subject-name-input"
+  ),
+  subjectModalTitle: document.querySelector(
+    "#subject-modal-title"
   ),
   subjectColorButtons: document.querySelectorAll(
     "#subject-modal .color-choice"
@@ -31,11 +34,7 @@ let editingSubjectId = null;
 // ---------- Subject form state ----------
 
 function getColorFromButton(button) {
-  const colorClass = Object.keys(COLOR_CLASSES).find((className) => {
-    return button.classList.contains(className);
-  });
-
-  return COLOR_CLASSES[colorClass] || "purple";
+  return button.dataset.color || "purple";
 }
 
 function setSelectedColor(colorName) {
@@ -48,12 +47,22 @@ function setSelectedColor(colorName) {
       "is-selected",
       buttonColor === selectedColor
     );
+
+    button.setAttribute(
+      "aria-pressed",
+      String(buttonColor === selectedColor)
+    );
   });
 }
 
 export function resetSubjectForm() {
   if (elements.subjectNameInput) {
     elements.subjectNameInput.value = "";
+  }
+
+  if (elements.subjectModalTitle) {
+    elements.subjectModalTitle.textContent =
+      "Add Subject";
   }
 
   editingSubjectId = null;
@@ -67,6 +76,11 @@ function openSubjectEditor(subject) {
 
   elements.subjectNameInput.value = subject.name;
   editingSubjectId = subject.id;
+
+  if (elements.subjectModalTitle) {
+    elements.subjectModalTitle.textContent =
+      "Edit Subject";
+  }
 
   setSelectedColor(subject.color);
   openModal("subject-modal");
@@ -85,7 +99,7 @@ function createEmptySubjectsMessage() {
   return emptyMessage;
 }
 
-function createSubjectCard(subject) {
+function createSubjectCard(subject, tasks) {
   const card = document.createElement("article");
   const colorDot = document.createElement("span");
   const title = document.createElement("h3");
@@ -100,6 +114,11 @@ function createSubjectCard(subject) {
   const editButton = document.createElement("button");
   const deleteButton = document.createElement("button");
 
+  const stats = getSubjectStats(
+    subject.id,
+    tasks
+  );
+
   card.classList.add("subject-card");
 
   colorDot.classList.add(
@@ -108,10 +127,12 @@ function createSubjectCard(subject) {
   );
 
   title.textContent = subject.name;
-  details.textContent = "0 tasks - 0 completed";
+  details.textContent =
+    `${stats.total} tasks - ${stats.completed} completed`;
 
   progressRow.classList.add("progress-row");
-  progressText.textContent = "0%";
+  progressText.textContent =
+    `${stats.progress}%`;
 
   progressTrack.classList.add("progress-track");
 
@@ -120,7 +141,8 @@ function createSubjectCard(subject) {
     subject.color
   );
 
-  progressFill.style.width = "0%";
+  progressFill.style.width =
+    `${stats.progress}%`;
 
   progressTrack.appendChild(progressFill);
   progressRow.append(progressText, progressTrack);
@@ -170,8 +192,13 @@ function renderSubjects() {
     return;
   }
 
+  const tasks = loadTasks();
+
   subjects.forEach((subject) => {
-    const subjectCard = createSubjectCard(subject);
+    const subjectCard = createSubjectCard(
+      subject,
+      tasks
+    );
 
     elements.subjectsGrid.appendChild(subjectCard);
   });
@@ -205,6 +232,7 @@ function addSubject() {
   const subjectName = getSubjectNameFromForm();
 
   if (subjectName === "") {
+    alert("Enter a subject name.");
     return;
   }
 
@@ -222,7 +250,7 @@ function addSubject() {
   subjects.push(newSubject);
 
   saveSubjects(subjects);
-  renderSubjects();
+  notifyDataUpdated();
   closeAllModals();
   resetSubjectForm();
 }
@@ -231,6 +259,7 @@ function updateSubject() {
   const subjectName = getSubjectNameFromForm();
 
   if (subjectName === "") {
+    alert("Enter a subject name.");
     return;
   }
 
@@ -251,14 +280,25 @@ function updateSubject() {
   subject.color = selectedColor;
 
   saveSubjects(subjects);
-  renderSubjects();
+  notifyDataUpdated();
   closeAllModals();
   resetSubjectForm();
 }
 
 function deleteSubject(subjectId) {
+  const tasks = loadTasks();
+
+  const associatedTasks = tasks.filter((task) => {
+    return task.subjectId === subjectId;
+  });
+
+  const confirmationMessage =
+    associatedTasks.length > 0
+      ? `This subject has ${associatedTasks.length} task(s). Deleting it will also delete all associated tasks. Continue?`
+      : "Are you sure you want to delete this subject?";
+
   const confirmDelete = confirm(
-    "Are you sure you want to delete this subject?"
+    confirmationMessage
   );
 
   if (!confirmDelete) {
@@ -269,8 +309,13 @@ function deleteSubject(subjectId) {
     return subject.id !== subjectId;
   });
 
+  const remainingTasks = tasks.filter((task) => {
+    return task.subjectId !== subjectId;
+  });
+
   saveSubjects(subjects);
-  renderSubjects();
+  saveTasks(remainingTasks);
+  notifyDataUpdated();
 }
 
 function editSubject(subjectId) {
@@ -320,4 +365,9 @@ export function initSubjects() {
   setupSubjectForm();
   setSelectedColor(selectedColor);
   renderSubjects();
+
+  onDataUpdated(() => {
+    subjects = loadSubjects();
+    renderSubjects();
+  });
 }

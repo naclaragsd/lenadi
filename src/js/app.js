@@ -15,6 +15,9 @@ import {
   resetTaskDetails,
 } from "./tasks.js";
 
+import { initDashboard } from "./dashboard.js";
+import { initProgress } from "./progress.js";
+
 function initLenadi() {
   setupModals({
     onClose: (modalId) => {
@@ -35,6 +38,8 @@ function initLenadi() {
   setupNavigation();
   initSubjects();
   initTasks();
+  initDashboard();
+  initProgress();
 }
 
 document.addEventListener(

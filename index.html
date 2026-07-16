@@ -206,14 +206,6 @@
             </p>
           </div>
 
-          <button
-            class="icon-button"
-            type="button"
-            aria-label="Sidebar collapse preview"
-          >
-            <span></span>
-            <span></span>
-          </button>
         </div>
 
         <div class="overall-card">
@@ -223,23 +215,28 @@
                 Overall progress
               </p>
 
-              <h2>
-                68% completed
+              <h2 id="dashboard-progress-text">
+                0% completed
               </h2>
             </div>
 
-            <span class="status-pill positive">
-              On track
+            <span
+              id="dashboard-progress-status"
+              class="status-pill pending"
+            >
+              No tasks yet
             </span>
           </div>
 
           <div
+            id="dashboard-progress-track"
             class="progress-track large"
-            aria-label="Overall progress 68 percent"
+            aria-label="Overall progress 0 percent"
           >
             <span
+              id="dashboard-progress-fill"
               class="progress-fill purple"
-              style="width: 68%;"
+              style="width: 0%;"
             ></span>
           </div>
         </div>
@@ -249,25 +246,25 @@
           <article class="summary-card">
             <span class="summary-marker lavender"></span>
             <p>Total Subjects</p>
-            <strong>8</strong>
+            <strong id="dashboard-total-subjects">0</strong>
           </article>
 
           <article class="summary-card">
             <span class="summary-marker sky"></span>
             <p>Total Tasks</p>
-            <strong>42</strong>
+            <strong id="dashboard-total-tasks">0</strong>
           </article>
 
           <article class="summary-card">
             <span class="summary-marker mint"></span>
             <p>Completed Tasks</p>
-            <strong>29</strong>
+            <strong id="dashboard-completed-tasks">0</strong>
           </article>
 
           <article class="summary-card">
             <span class="summary-marker amber"></span>
             <p>Pending Tasks</p>
-            <strong>13</strong>
+            <strong id="dashboard-pending-tasks">0</strong>
           </article>
 
         </div>
@@ -277,52 +274,18 @@
           <article class="card">
             <div class="card-heading-row">
               <h2>Today's Tasks</h2>
-              <span class="muted-count">4 items</span>
+              <span
+                id="dashboard-today-count"
+                class="muted-count"
+              >
+                0 items
+              </span>
             </div>
 
-            <ul class="task-preview-list">
-              <li>
-                <span class="checkbox-visual checked"></span>
-
-                <div>
-                  <strong>
-                    Review data structures
-                  </strong>
-
-                  <p>
-                    Programming - Today
-                  </p>
-                </div>
-              </li>
-
-              <li>
-                <span class="checkbox-visual"></span>
-
-                <div>
-                  <strong>
-                    Practice derivatives
-                  </strong>
-
-                  <p>
-                    Mathematics - Today
-                  </p>
-                </div>
-              </li>
-
-              <li>
-                <span class="checkbox-visual"></span>
-
-                <div>
-                  <strong>
-                    Read sprint planning notes
-                  </strong>
-
-                  <p>
-                    Software Engineering - Today
-                  </p>
-                </div>
-              </li>
-            </ul>
+            <ul
+              id="dashboard-today-tasks"
+              class="task-preview-list"
+            ></ul>
           </article>
 
           <article class="card motivation-card">
@@ -341,29 +304,10 @@
 
         </div>
 
-        <div class="subject-overview-grid">
-
-          <article class="mini-subject-card purple-soft">
-            <span>Programming</span>
-            <strong>76%</strong>
-          </article>
-
-          <article class="mini-subject-card blue-soft">
-            <span>Mathematics</span>
-            <strong>58%</strong>
-          </article>
-
-          <article class="mini-subject-card green-soft">
-            <span>Engineering</span>
-            <strong>71%</strong>
-          </article>
-
-          <article class="mini-subject-card coral-soft">
-            <span>Networks</span>
-            <strong>64%</strong>
-          </article>
-
-        </div>
+        <div
+          id="dashboard-subjects"
+          class="subject-overview-grid"
+        ></div>
       </section>
 
       <!-- Subjects screen -->
@@ -398,13 +342,17 @@
         <div
           class="modal-overlay"
           id="subject-modal"
-          aria-label="Add subject modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="subject-modal-title"
           hidden
         >
           <div class="modal-card">
 
             <div class="modal-header">
-              <h3>Add Subject</h3>
+              <h3 id="subject-modal-title">
+                Add Subject
+              </h3>
 
               <button
                 class="modal-close"
@@ -416,10 +364,11 @@
               </button>
             </div>
 
-            <label>
+            <label for="subject-name-input">
               Subject name
 
               <input
+                id="subject-name-input"
                 type="text"
                 placeholder="Example: Biology"
               >
@@ -431,25 +380,63 @@
               </span>
 
               <div class="color-options">
-                <span class="color-choice purple-dot"></span>
-                <span class="color-choice blue-dot"></span>
-                <span class="color-choice green-dot"></span>
-                <span class="color-choice coral-dot"></span>
-                <span class="color-choice amber-dot"></span>
-                <span class="color-choice teal-dot"></span>
-                <span class="color-choice stone-dot"></span>
+                <button
+                  type="button"
+                  class="color-choice purple-dot"
+                  data-color="purple"
+                  aria-label="Purple"
+                  aria-pressed="true"
+                ></button>
+
+                <button
+                  type="button"
+                  class="color-choice blue-dot"
+                  data-color="blue"
+                  aria-label="Blue"
+                  aria-pressed="false"
+                ></button>
+
+                <button
+                  type="button"
+                  class="color-choice green-dot"
+                  data-color="green"
+                  aria-label="Green"
+                  aria-pressed="false"
+                ></button>
+
+                <button
+                  type="button"
+                  class="color-choice coral-dot"
+                  data-color="coral"
+                  aria-label="Coral"
+                  aria-pressed="false"
+                ></button>
+
+                <button
+                  type="button"
+                  class="color-choice amber-dot"
+                  data-color="amber"
+                  aria-label="Amber"
+                  aria-pressed="false"
+                ></button>
+
+                <button
+                  type="button"
+                  class="color-choice teal-dot"
+                  data-color="teal"
+                  aria-label="Teal"
+                  aria-pressed="false"
+                ></button>
+
+                <button
+                  type="button"
+                  class="color-choice stone-dot"
+                  data-color="stone"
+                  aria-label="Stone"
+                  aria-pressed="false"
+                ></button>
               </div>
             </div>
-
-            <label>
-              Icon
-
-              <select>
-                <option>
-                  Select an icon
-                </option>
-              </select>
-            </label>
 
             <div class="modal-actions">
               <button
@@ -538,6 +525,8 @@
         <div
           class="modal-overlay"
           id="task-modal"
+          role="dialog"
+          aria-modal="true"
           aria-labelledby="task-modal-title"
           hidden
         >
@@ -627,6 +616,8 @@
         <div
           class="modal-overlay"
           id="task-details-modal"
+          role="dialog"
+          aria-modal="true"
           aria-labelledby="task-details-modal-title"
           hidden
         >
@@ -741,20 +732,28 @@
                 Total completion
               </p>
 
-              <h2>
-                68% overall
+              <h2 id="progress-overall-text">
+                0% overall
               </h2>
             </div>
 
-            <strong class="large-number">
-              29/42
+            <strong
+              id="progress-fraction"
+              class="large-number"
+            >
+              0/0
             </strong>
           </div>
 
-          <div class="progress-track large">
+          <div
+            id="progress-overall-track"
+            class="progress-track large"
+            aria-label="Overall progress 0 percent"
+          >
             <span
+              id="progress-overall-fill"
               class="progress-fill purple"
-              style="width: 68%;"
+              style="width: 0%;"
             ></span>
           </div>
         </article>
@@ -766,90 +765,33 @@
               Progress by subject
             </h2>
 
-            <div class="subject-progress-list">
-
-              <div class="subject-progress-item">
-                <div>
-                  <strong>Programming</strong>
-                  <span>9 completed - 3 pending</span>
-                </div>
-
-                <b>75%</b>
-
-                <div class="progress-track">
-                  <span
-                    class="progress-fill purple"
-                    style="width: 75%;"
-                  ></span>
-                </div>
-              </div>
-
-              <div class="subject-progress-item">
-                <div>
-                  <strong>Mathematics</strong>
-                  <span>6 completed - 4 pending</span>
-                </div>
-
-                <b>60%</b>
-
-                <div class="progress-track">
-                  <span
-                    class="progress-fill blue"
-                    style="width: 60%;"
-                  ></span>
-                </div>
-              </div>
-
-              <div class="subject-progress-item">
-                <div>
-                  <strong>Software Engineering</strong>
-                  <span>5 completed - 3 pending</span>
-                </div>
-
-                <b>63%</b>
-
-                <div class="progress-track">
-                  <span
-                    class="progress-fill green"
-                    style="width: 63%;"
-                  ></span>
-                </div>
-              </div>
-
-              <div class="subject-progress-item">
-                <div>
-                  <strong>Networks</strong>
-                  <span>4 completed - 3 pending</span>
-                </div>
-
-                <b>57%</b>
-
-                <div class="progress-track">
-                  <span
-                    class="progress-fill coral"
-                    style="width: 57%;"
-                  ></span>
-                </div>
-              </div>
-
-            </div>
+            <div
+              id="subject-progress-list"
+              class="subject-progress-list"
+            ></div>
           </article>
 
           <div class="stats-column">
 
             <article class="summary-card wide">
               <p>Best subject</p>
-              <strong>Programming</strong>
+              <strong id="best-subject">
+                No data yet
+              </strong>
             </article>
 
             <article class="summary-card wide">
-              <p>This week</p>
-              <strong>11 tasks</strong>
+              <p>Completed tasks</p>
+              <strong id="progress-completed-tasks">
+                0
+              </strong>
             </article>
 
             <article class="summary-card wide">
               <p>Pending focus</p>
-              <strong>Mathematics</strong>
+              <strong id="pending-focus">
+                No pending tasks
+              </strong>
             </article>
 
           </div>

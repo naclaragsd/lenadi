@@ -1,5 +1,9 @@
 import { closeAllModals, openModal } from "./modal.js";
 import {
+  notifyDataUpdated,
+  onDataUpdated,
+} from "./events.js";
+import {
   loadSubjects,
   loadTasks,
   saveTasks,
@@ -198,6 +202,13 @@ function populateSubjectFilter() {
     previousOptionStillExists
       ? previousValue
       : "all";
+
+  elements.subjectFilter.disabled =
+    subjects.length < 2;
+
+  if (subjects.length < 2) {
+    elements.subjectFilter.value = "all";
+  }
 }
 
 // ---------- Task form ----------
@@ -320,6 +331,19 @@ function validateTask(taskData) {
 
 // ---------- Task actions ----------
 
+function persistTasks() {
+  saveTasks(tasks);
+  notifyDataUpdated();
+}
+
+function refreshTasks() {
+  tasks = loadTasks();
+
+  populateTaskSubjectSelect();
+  populateSubjectFilter();
+  renderTasks();
+}
+
 function addTask(taskData) {
   const newTask = {
     id: Date.now(),
@@ -332,8 +356,7 @@ function addTask(taskData) {
 
   tasks.push(newTask);
 
-  saveTasks(tasks);
-  renderTasks();
+  persistTasks();
   closeAllModals();
 }
 
@@ -362,8 +385,7 @@ function updateTask(taskData) {
   task.dueDate = taskData.dueDate;
   task.description = taskData.description;
 
-  saveTasks(tasks);
-  renderTasks();
+  persistTasks();
   closeAllModals();
 }
 
@@ -433,8 +455,7 @@ function deleteTask(taskId) {
     return task.id !== taskId;
   });
 
-  saveTasks(tasks);
-  renderTasks();
+  persistTasks();
 
   return true;
 }
@@ -450,8 +471,7 @@ function toggleTaskCompleted(taskId) {
 
   task.completed = !task.completed;
 
-  saveTasks(tasks);
-  renderTasks();
+  persistTasks();
 }
 
 // ---------- Date formatting ----------
@@ -945,10 +965,7 @@ function setupTaskEvents() {
 // ---------- Initialization ----------
 
 export function initTasks() {
-  tasks = loadTasks();
-
   setupTaskEvents();
-  populateTaskSubjectSelect();
-  populateSubjectFilter();
-  renderTasks();
+  refreshTasks();
+  onDataUpdated(refreshTasks);
 }

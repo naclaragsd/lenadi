@@ -3,12 +3,30 @@ const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
 const modals = document.querySelectorAll(".modal-overlay");
 
 let handleModalClose = () => {};
+let lastFocusedElement = null;
+
+function focusModalContent(modal) {
+  const formControl = modal.querySelector(
+    "input:not([disabled]), select:not([disabled]), textarea:not([disabled])"
+  );
+
+  const fallbackButton = modal.querySelector(
+    "button:not([disabled])"
+  );
+
+  const elementToFocus =
+    formControl || fallbackButton;
+
+  elementToFocus?.focus();
+}
 
 export function openModal(modalId) {
   const modal = document.getElementById(modalId);
 
   if (modal) {
+    lastFocusedElement = document.activeElement;
     modal.hidden = false;
+    focusModalContent(modal);
   }
 }
 
@@ -19,6 +37,12 @@ function closeModal(modal) {
 
   modal.hidden = true;
   handleModalClose(modal.id);
+
+  if (
+    lastFocusedElement instanceof HTMLElement
+  ) {
+    lastFocusedElement.focus();
+  }
 }
 
 export function closeAllModals() {
