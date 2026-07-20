@@ -129,6 +129,11 @@ function createSubjectCard(subject, tasks) {
   const editButton = document.createElement("button");
   const deleteButton = document.createElement("button");
 
+  card.classList.add(
+  "subject-card",
+  `${subject.color}-soft`
+  );
+
   const stats = getSubjectStats(
     subject.id,
     tasks
