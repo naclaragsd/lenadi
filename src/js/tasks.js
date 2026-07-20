@@ -20,6 +20,10 @@ const elements = {
     "#task-title-input"
   ),
 
+  taskFormError: document.querySelector(
+    "#task-form-error"
+  ),
+
   taskSubjectSelect: document.querySelector(
     "#task-subject-select"
   ),
@@ -90,6 +94,18 @@ const elements = {
 let tasks = [];
 let editingTaskId = null;
 let selectedTaskId = null;
+
+// ---------- Task form errors ----------
+
+function setTaskFormError(message) {
+  if (elements.taskFormError) {
+    elements.taskFormError.textContent = message;
+  }
+}
+
+function clearTaskFormError() {
+  setTaskFormError("");
+}
 
 // ---------- Subject options ----------
 
@@ -234,6 +250,15 @@ export function resetTaskForm() {
   editingTaskId = null;
 
   populateTaskSubjectSelect();
+
+  if (loadSubjects().length === 0) {
+    setTaskFormError(
+      "Create a subject before adding tasks."
+    );
+    return;
+  }
+
+  clearTaskFormError();
 }
 
 export function resetTaskDetails() {
@@ -309,22 +334,26 @@ function taskNameExists(taskData) {
 
 function validateTask(taskData) {
   if (taskData.title === "") {
-    alert("Enter a title for the task.");
+    setTaskFormError("Enter a title for the task.");
+    elements.taskTitleInput?.focus();
     return false;
   }
 
   if (!taskData.subjectId) {
-    alert("Select a subject.");
+    setTaskFormError("Select a subject.");
+    elements.taskSubjectSelect?.focus();
     return false;
   }
 
   if (taskNameExists(taskData)) {
-    alert(
+    setTaskFormError(
       "A task with this title already exists in the selected subject."
     );
-
+    elements.taskTitleInput?.focus();
     return false;
   }
+
+  clearTaskFormError();
 
   return true;
 }
@@ -376,9 +405,11 @@ function updateTask(taskData) {
     task.description !== taskData.description;
 
   if (!hasChanges) {
-    alert("No changes were detected.");
+    setTaskFormError("No changes were detected.");
     return;
   }
+
+  clearTaskFormError();
 
   task.title = taskData.title;
   task.subjectId = taskData.subjectId;
@@ -439,6 +470,7 @@ function editTask(taskId) {
     task.subjectId
   );
 
+  clearTaskFormError();
   openModal("task-modal");
 }
 
@@ -901,6 +933,16 @@ function setupTaskEvents() {
       resetTaskForm
     );
   }
+
+  elements.taskTitleInput?.addEventListener(
+    "input",
+    clearTaskFormError
+  );
+
+  elements.taskSubjectSelect?.addEventListener(
+    "change",
+    clearTaskFormError
+  );
 
   if (elements.subjectFilter) {
     elements.subjectFilter.addEventListener(

@@ -18,6 +18,9 @@ const elements = {
   subjectModalTitle: document.querySelector(
     "#subject-modal-title"
   ),
+  subjectFormError: document.querySelector(
+    "#subject-form-error"
+  ),
   subjectColorButtons: document.querySelectorAll(
     "#subject-modal .color-choice"
   ),
@@ -32,6 +35,16 @@ let selectedColor = "purple";
 let editingSubjectId = null;
 
 // ---------- Subject form state ----------
+
+function setSubjectFormError(message) {
+  if (elements.subjectFormError) {
+    elements.subjectFormError.textContent = message;
+  }
+}
+
+function clearSubjectFormError() {
+  setSubjectFormError("");
+}
 
 function getColorFromButton(button) {
   return button.dataset.color || "purple";
@@ -67,6 +80,7 @@ export function resetSubjectForm() {
 
   editingSubjectId = null;
   setSelectedColor("purple");
+  clearSubjectFormError();
 }
 
 function openSubjectEditor(subject) {
@@ -83,6 +97,7 @@ function openSubjectEditor(subject) {
   }
 
   setSelectedColor(subject.color);
+  clearSubjectFormError();
   openModal("subject-modal");
 }
 
@@ -232,14 +247,18 @@ function addSubject() {
   const subjectName = getSubjectNameFromForm();
 
   if (subjectName === "") {
-    alert("Enter a subject name.");
+    setSubjectFormError("Enter a subject name.");
+    elements.subjectNameInput?.focus();
     return;
   }
 
   if (subjectNameExists(subjectName)) {
-    alert("This subject already exists.");
+    setSubjectFormError("This subject already exists.");
+    elements.subjectNameInput?.focus();
     return;
   }
+
+  clearSubjectFormError();
 
   const newSubject = {
     id: Date.now(),
@@ -259,12 +278,14 @@ function updateSubject() {
   const subjectName = getSubjectNameFromForm();
 
   if (subjectName === "") {
-    alert("Enter a subject name.");
+    setSubjectFormError("Enter a subject name.");
+    elements.subjectNameInput?.focus();
     return;
   }
 
   if (subjectNameExists(subjectName)) {
-    alert("This subject already exists.");
+    setSubjectFormError("This subject already exists.");
+    elements.subjectNameInput?.focus();
     return;
   }
 
@@ -275,6 +296,8 @@ function updateSubject() {
   if (!subject) {
     return;
   }
+
+  clearSubjectFormError();
 
   subject.name = subjectName;
   subject.color = selectedColor;
@@ -347,12 +370,18 @@ function setupSubjectForm() {
     );
   }
 
+  elements.subjectNameInput?.addEventListener(
+    "input",
+    clearSubjectFormError
+  );
+
   elements.subjectColorButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const selectedButtonColor =
         getColorFromButton(button);
 
       setSelectedColor(selectedButtonColor);
+      clearSubjectFormError();
     });
   });
 }

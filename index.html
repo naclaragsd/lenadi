@@ -65,37 +65,10 @@
             aria-hidden="true"
           >
             <svg viewBox="0 0 24 24">
-              <rect
-                x="3"
-                y="3"
-                width="7"
-                height="8"
-                rx="2"
-              ></rect>
-
-              <rect
-                x="14"
-                y="3"
-                width="7"
-                height="5"
-                rx="2"
-              ></rect>
-
-              <rect
-                x="14"
-                y="12"
-                width="7"
-                height="9"
-                rx="2"
-              ></rect>
-
-              <rect
-                x="3"
-                y="15"
-                width="7"
-                height="6"
-                rx="2"
-              ></rect>
+              <rect x="3" y="3" width="7" height="8" rx="2"></rect>
+              <rect x="14" y="3" width="7" height="5" rx="2"></rect>
+              <rect x="14" y="12" width="7" height="9" rx="2"></rect>
+              <rect x="3" y="15" width="7" height="6" rx="2"></rect>
             </svg>
           </span>
 
@@ -132,14 +105,7 @@
             aria-hidden="true"
           >
             <svg viewBox="0 0 24 24">
-              <rect
-                x="3"
-                y="4"
-                width="18"
-                height="16"
-                rx="3"
-              ></rect>
-
+              <rect x="3" y="4" width="18" height="16" rx="3"></rect>
               <path d="m8 10 2 2 4-4"></path>
               <path d="M8 16h8"></path>
             </svg>
@@ -205,7 +171,6 @@
               Keep your subjects, tasks, and progress in one focused place.
             </p>
           </div>
-
         </div>
 
         <div class="overall-card">
@@ -274,6 +239,7 @@
           <article class="card">
             <div class="card-heading-row">
               <h2>Today's Tasks</h2>
+
               <span
                 id="dashboard-today-count"
                 class="muted-count"
@@ -373,6 +339,12 @@
                 placeholder="Example: Biology"
               >
             </label>
+
+            <p
+              class="form-error"
+              id="subject-form-error"
+              aria-live="polite"
+            ></p>
 
             <div class="form-group">
               <span>
@@ -557,6 +529,12 @@
               >
             </label>
 
+            <p
+              class="form-error"
+              id="task-form-error"
+              aria-live="polite"
+            ></p>
+
             <label for="task-subject-select">
               Subject
 
@@ -612,6 +590,7 @@
 
           </div>
         </div>
+
         <!-- Task details modal -->
         <div
           class="modal-overlay"
