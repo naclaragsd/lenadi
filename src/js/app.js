@@ -1,6 +1,7 @@
 import { setupModals } from "./modal.js";
 
 import {
+  setupMobileSidebar,
   setupNavigation,
 } from "./navigation.js";
 
@@ -36,6 +37,7 @@ function initLenadi() {
   });
 
   setupNavigation();
+  setupMobileSidebar();
   initSubjects();
   initTasks();
   initDashboard();

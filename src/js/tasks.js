@@ -95,6 +95,27 @@ let tasks = [];
 let editingTaskId = null;
 let selectedTaskId = null;
 
+const subjectAccentColors = {
+  purple: "#7C3AED",
+  blue: "#2563EB",
+  green: "#15803D",
+  coral: "#BE123C",
+  amber: "#B45309",
+  teal: "#0F766E",
+  stone: "#64748B",
+};
+
+function getSubjectAccentColor(subject) {
+  if (!subject) {
+    return subjectAccentColors.stone;
+  }
+
+  return (
+    subjectAccentColors[subject.color] ||
+    subjectAccentColors.stone
+  );
+}
+
 // ---------- Task form errors ----------
 
 function setTaskFormError(message) {
@@ -265,7 +286,8 @@ export function resetTaskDetails() {
   selectedTaskId = null;
 
   if (elements.taskDetailsTitle) {
-    elements.taskDetailsTitle.textContent = "";
+     elements.taskDetailsTitle.textContent = "";
+     elements.taskDetailsTitle.style.color = "";
   }
 
   if (elements.taskDetailsSubject) {
@@ -576,7 +598,10 @@ function openTaskDetails(taskId) {
 
   if (elements.taskDetailsTitle) {
     elements.taskDetailsTitle.textContent =
-      task.title;
+    task.title;
+
+    elements.taskDetailsTitle.style.color =
+    getSubjectAccentColor(subject);
   }
 
   if (elements.taskDetailsSubject) {
