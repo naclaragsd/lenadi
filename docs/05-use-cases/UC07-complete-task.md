@@ -2,13 +2,13 @@
 
 ## Goal
 
-Allow the user to mark a task as completed.
+Allow the student to mark a task as completed.
 
 ---
 
 ## Primary Actor
 
-User
+student
 
 ---
 
@@ -17,13 +17,13 @@ User
 - The subject must already be registered in the system.
 - The task must already be registered within the selected subject.
 - The task status must be **Pending**.
-- The user is on the Subject page.
+- The student is on the Subject page.
 
 ---
 
 ## Main Flow
 
-1. The user clicks the **"Complete Task"** button.
+1. The student clicks the **"Complete Task"** button.
 2. The system updates the task status to **Completed**.
 3. The system updates the study progress.
 4. The system updates the task list.

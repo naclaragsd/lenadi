@@ -1,174 +1,193 @@
 # 🗺️ Lenadi Roadmap
 
-This roadmap outlines the planned evolution of **Lenadi**, a study management platform designed to help students organize their academic routine and, in future versions, provide AI-powered learning assistance.
+This roadmap presents the planned evolution of **Lenadi**, a study management platform designed to help students organize their academic routine and progressively introduce full-stack and AI-powered features.
 
-The roadmap is organized by development versions. Features and priorities may evolve as the project grows.
-
----
-
-# 🚀 Version 1 — Study Management (Current Development)
-
-**Goal:** Build the foundation of the platform with subject organization and task management.
-
-## 📋 Planning & Documentation
-
-* [x] Project planning
-* [x] Software documentation
-* [x] Requirements specification
-* [x] Use case documentation
-* [x] Test case documentation
-* [x] GitHub repository structure
-* [x] README
+Features and priorities may evolve as the project grows.
 
 ---
+
+# ✅ Version 1 — Study Management (Completed)
+
+**Goal:** Build the initial foundation of Lenadi with subject organization, task management, progress tracking, and local data persistence.
+
+## 📋 Planning and Documentation
+
+- [x] Project description
+- [x] Objectives and scope
+- [x] Requirements specification
+- [x] Business rules
+- [x] Use case documentation
+- [x] Use case diagram
+- [x] Test case documentation
+- [x] GitHub repository organization
+- [x] Project README
 
 ## 🎨 User Interface
 
-* [x] Landing page
-* [x] Dashboard layout
-* [x] Subject cards
-* [x] Task cards
-* [x] Progress visualization
-* [x] Responsive design
-* [x] Initial animations
-
----
+- [x] Dashboard
+- [x] Subject cards
+- [x] Task list
+- [x] Task details modal
+- [x] Progress visualization
+- [x] Responsive layout
+- [x] Mobile sidebar
+- [x] Page transitions
+- [x] Empty states
+- [x] Validation and confirmation messages
 
 ## 📚 Subjects
 
-* [ ] Create subject
-* [ ] Edit subject
-* [ ] Delete subject
-* [ ] Subject color customization
-* [ ] Subject progress calculation
-
----
+- [x] Register subjects
+- [x] Edit subjects
+- [x] Delete subjects
+- [x] Customize subject colors
+- [x] Calculate progress by subject
 
 ## ✅ Tasks
 
-* [ ] Create task
-* [ ] Edit task
-* [ ] Delete task
-* [ ] Mark task as completed
-* [ ] Associate tasks with subjects
-* [ ] Task filtering
-
----
+- [x] Register tasks
+- [x] Edit tasks
+- [x] Delete tasks
+- [x] Associate tasks with subjects
+- [x] Mark tasks as completed
+- [x] Filter tasks by subject and status
+- [x] View task details
 
 ## 💾 Data Persistence
 
-* [ ] LocalStorage integration
-* [ ] Automatic data loading
-* [ ] Automatic data saving
+- [x] LocalStorage integration
+- [x] Automatic data loading
+- [x] Automatic data saving
+
+## 📊 Progress
+
+- [x] Overall progress calculation
+- [x] Progress calculation by subject
+- [x] Dynamic task and subject counters
+- [x] Completed and pending task tracking
 
 ---
 
-## 📊 Dashboard
+# 🗄️ Version 2 — Full-Stack Foundation
 
-* [ ] Overall progress calculation
-* [ ] Progress per subject
-* [ ] Statistics cards
-* [ ] Dynamic counters
+**Goal:** Transform Lenadi into a full-stack application with user accounts, a backend API, and relational data persistence.
 
----
+## Backend
 
-## 🎯 User Experience
+- [ ] Define the backend architecture
+- [ ] Create a REST API
+- [ ] Connect the front-end to the API
+- [ ] Implement server-side validation
+- [ ] Implement centralized error handling
+- [ ] Add backend tests
 
-* [ ] Empty states
-* [ ] Validation messages
-* [ ] Better mobile experience
-* [ ] Accessibility improvements
-* [ ] Performance optimization
+## Relational Database
 
----
+- [ ] Design the relational database schema
+- [ ] Create tables for users, subjects, and tasks
+- [ ] Define primary and foreign keys
+- [ ] Implement database constraints
+- [ ] Create SQL queries for application operations
+- [ ] Migrate data persistence from LocalStorage to the database
 
-# 🤖 Version 2 — AI Learning Assistant
+## Authentication
 
-**Goal:** Transform Lenadi into an intelligent study platform.
+- [ ] Register user accounts
+- [ ] Log in and log out
+- [ ] Protect user credentials
+- [ ] Keep data separated by user
+- [ ] Implement authenticated sessions
 
-## AI Features
+## Data Synchronization
 
-* [ ] Lenadi Chat
-* [ ] AI study assistant
-* [ ] Study recommendations
-* [ ] Smart task suggestions
-
----
-
-## Study Resources
-
-* [ ] Study summaries
-* [ ] Notes management
-* [ ] PDF upload
-* [ ] PDF viewer
-* [ ] Organize study materials
-
----
+- [ ] Persist user data in the database
+- [ ] Access data from different devices
+- [ ] Synchronize subjects, tasks, and progress
+- [ ] Handle loading and connection states
 
 ## Personalization
 
-* [ ] Dark mode
-* [ ] Subject icon customization
-* [ ] User preferences
-* [ ] Improved dashboard customization
+- [ ] Dark mode
+- [ ] Custom subject icons
+- [ ] User preferences
+- [ ] Additional subject customization options
 
 ---
 
-# 🧠 Version 3 — Intelligent Learning
+# 🤖 Version 3 — AI Learning Assistant
 
-**Goal:** Personalize the learning experience using Artificial Intelligence.
+**Goal:** Introduce academic content management and AI-powered study assistance.
 
-## Learning Tools
+## Study Resources
 
-* [ ] Flashcards
-* [ ] AI-generated flashcards
-* [ ] Personalized study plans
-* [ ] Smart revision reminders
+- [ ] Upload PDF files
+- [ ] View PDF files
+- [ ] Organize study materials by subject
+- [ ] Create and manage study summaries
+- [ ] Associate materials with subjects
+
+## Lenadi Chat
+
+- [ ] Create the Lenadi Chat interface
+- [ ] Integrate an AI model
+- [ ] Ask questions about study materials
+- [ ] Generate study summaries
+- [ ] Maintain conversation context
+- [ ] Store conversation history
+
+## Intelligent Features
+
+- [ ] RAG-powered knowledge retrieval
+- [ ] Personalized study recommendations
+- [ ] Smart task suggestions
+- [ ] Context-aware academic assistance
+- [ ] Responsible handling of user content
 
 ---
 
-## AI Features
-
-* [ ] Academic memory
-* [ ] RAG-powered knowledge retrieval
-* [ ] Personalized recommendations
-* [ ] AI learning analytics
-
----
-
-## Statistics
-
-* [ ] Study history
-* [ ] Performance dashboard
-* [ ] Productivity insights
-* [ ] Subject evolution tracking
-
----
-
-# 🌍 Future Versions
+# 🔮 Future Versions
 
 Potential long-term features include:
 
-* [ ] Desktop application
-* [ ] Mobile application
-* [ ] Cloud synchronization
-* [ ] User authentication
-* [ ] Multi-device support
-* [ ] Calendar integration
-* [ ] Notifications
-* [ ] Collaborative study
-* [ ] Shared notes
-* [ ] Gamification
-* [ ] Achievements system
-* [ ] Focus mode
-* [ ] Pomodoro timer
-* [ ] Import/export data
-* [ ] Public API
+## Learning Tools
+
+- [ ] Flashcards
+- [ ] AI-generated flashcards
+- [ ] Smart study planner
+- [ ] Personalized study plans
+- [ ] Revision reminders
+- [ ] Calendar integration
+- [ ] Focus mode
+- [ ] Pomodoro timer
+
+## Statistics
+
+- [ ] Study history
+- [ ] Weekly reports
+- [ ] Performance dashboard
+- [ ] Productivity insights
+- [ ] Subject evolution tracking
+- [ ] AI learning analytics
+
+## Platform Expansion
+
+- [ ] Desktop application
+- [ ] Mobile application
+- [ ] Notifications
+- [ ] Import and export data
+- [ ] Public API
+
+## Collaboration and Engagement
+
+- [ ] Collaborative study
+- [ ] Shared notes
+- [ ] Gamification
+- [ ] Achievement system
 
 ---
 
 # 📌 Project Philosophy
 
-Lenadi is being developed incrementally following Software Engineering practices.
+Lenadi follows an incremental development approach based on Software Engineering practices.
 
-Each version aims to deliver a complete and stable set of features before introducing new capabilities, allowing the project to evolve progressively while maintaining code quality and documentation.
+Each version aims to deliver a complete and stable set of features before introducing new capabilities. This allows the project to evolve progressively while maintaining code quality, documentation, and a clear separation of scope between versions.

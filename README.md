@@ -1,142 +1,118 @@
 # 📚 Lenadi
 
-> A study management platform designed to help students organize their academic routine through task management, progress tracking, and future AI-powered study assistance.
+> A responsive study management web application for organizing subjects, tasks, deadlines, and academic progress.
+
+![Version](https://img.shields.io/badge/version-1.0-7C3AED)
+![Status](https://img.shields.io/badge/status-completed-16A34A)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-F7DF1E?logo=javascript&logoColor=000)
+![GitHub Pages](https://img.shields.io/badge/deployed%20with-GitHub%20Pages-222?logo=github)
+
+[![Open Lenadi](https://img.shields.io/badge/OPEN%20LIVE%20DEMO-7C3AED?style=for-the-badge)](https://naclaragsd.github.io/lenadi/)
+
+> ✅ **Version 1 is complete, documented, tested, and deployed.**
 
 ---
 
-## 🚧 Project Status
+## ✨ About
 
-**Version 1 — In Development**
+Lenadi is a study management platform designed to help students organize subjects, tasks, deadlines, and academic progress through a simple and intuitive interface.
 
-This project is currently under active development following an incremental software engineering approach.
+The project was created not only as a functional application, but also as an opportunity to apply Software Engineering practices such as requirements specification, business rules, use case modeling, functional testing, version control, and incremental development.
 
----
-
-## ✨ About the Project
-
-Lenadi is a study management platform created to centralize the organization of academic activities.
-
-The first version focuses on helping students manage subjects and tasks while tracking their study progress in a simple and intuitive way.
-
-Future versions will transform Lenadi into a complete study platform with Artificial Intelligence, flashcards, PDF management, study recommendations, and a desktop application.
+🔗 **Live application:** [naclaragsd.github.io/lenadi](https://naclaragsd.github.io/lenadi/)
 
 ---
 
-## 🎯 Version 1 Features
+## 🎯 Main Features
 
-- Subject management (CRUD)
-- Task management (CRUD)
-- Task filtering by subject and status
-- Task completion tracking
-- Automatic study progress calculation
-- Automatic data persistence using Local Storage
+- Create, edit, and delete subjects
+- Customize subject colors
+- Create, edit, and delete tasks
+- Associate tasks with subjects
+- Add task deadlines and descriptions
+- View complete task details
+- Mark tasks as completed or pending
+- Filter tasks by subject and status
+- Calculate overall and subject-specific progress
+- Display completed and pending task counters
+- Persist data automatically using browser localStorage
+- Responsive interface with mobile navigation
+- Empty states, validations, and confirmation messages
+
+---
+
+## 💡 What This Project Demonstrates
+
+- Modular JavaScript organization
+- CRUD operations and application state management
+- Browser data persistence
+- Responsive interface development
+- DOM manipulation and event handling
+- Requirements and business rule definition
+- UML use case modeling
+- Functional test case documentation
+- Incremental development with Git and GitHub
+
+Version 1 was intentionally developed without frameworks to strengthen core HTML, CSS, and JavaScript fundamentals.
 
 ---
 
 ## 🛠️ Technologies
 
-- HTML5
-- CSS3
-- JavaScript
-- Local Storage
+- **HTML5** — semantic application structure
+- **CSS3** — responsive layout, components, and animations
+- **JavaScript ES6+** — application logic and interactions
+- **JavaScript Modules** — separation of responsibilities
+- **LocalStorage** — automatic browser data persistence
+- **Git and GitHub** — version control and project organization
+- **GitHub Pages** — application deployment
 
 ---
 
-## 📂 Project Documentation
+## 📄 Software Engineering Documentation
 
-The project follows a structured Software Engineering workflow.
-
-Current documentation:
-
-- ✔️ Project Description
-- ✔️ Objectives and Scope
-- ✔️ Requirements
-
-Upcoming documentation:
-
-- Business Rules
-- Use Cases
-- Test Cases
-- UML Diagrams
-- Interface Prototypes
+| Document | Content |
+|---|---|
+| [Project Description](docs/01-project-description.md) | Overview, problem, audience, and project purpose |
+| [Objectives and Scope](docs/02-objectives-and-scope.md) | Version 1 scope and limitations |
+| [Requirements](docs/03-requirements.md) | Functional and non-functional requirements |
+| [Business Rules](docs/04-business-rules.md) | System rules and restrictions |
+| [Use Cases](docs/05-use-cases) | UC01 to UC10 |
+| [Use Case Diagram](docs/diagrams/use-case-diagram.png) | UML representation of the system |
+| [Test Cases](docs/07-test-cases.md) | Functional validation scenarios |
+| [Roadmap](docs/06-roadmap.md) | Planned project evolution |
 
 ---
 
 ## 🗺️ Development Roadmap
 
-- ✅ Project Planning
-- ✅ Initial Documentation
-- ✅Business Rules
-- ✅ Use Cases
-- ⏳ User Interface Prototype
-- ⏳ Version 1 Development
-- ⏳ Testing
-- ⏳ Version 1 Release
-- ⏳ Desktop Application (Electron)
-- ⏳ Artificial Intelligence Features
+| Version | Focus | Status |
+|---|---|---|
+| **Version 1** | Study management, progress tracking, responsive interface, and LocalStorage | ✅ Completed |
+| **Version 2** | Backend REST API, relational database, authentication, and user-specific data | 📌 Planned |
+| **Version 3** | PDF management, study summaries, Lenadi Chat, RAG, and AI recommendations | 💡 Future |
+
+See the complete [development roadmap](docs/06-roadmap.md).
 
 ---
 
-## 📁 Project Structure
+## 💻 Running Locally
 
-```text
-lenadi/
-│
-├── docs/
-│   ├── 01-project-description.md
-│   ├── 02-objectives-and-scope.md
-│   ├── 03-requirements.md
-│   ├── 04-business-rules.md
-│   └── 05-use-cases/
-│       ├── UC01-register-subject.md
-│       ├── UC02-edit-subject.md
-│       ├── UC03-delete-subject.md
-│       ├── UC04-register-task.md
-│       ├── UC05-edit-task.md
-│       ├── UC06-delete-task.md
-│       ├── UC07-complete-task.md
-│       └── UC08-filter-tasks.md
-│
-├── src/
-│
-└── README.md
+Clone the repository:
+
+```bash
+git clone https://github.com/naclaragsd/lenadi.git
 ```
 
----
+Open the project in Visual Studio Code and run `index.html` using the **Live Server** extension.
 
-## 💡 Why this project?
-
-This project is being developed not only as a study management platform, but also as an opportunity to apply Software Engineering practices in a real-world scenario.
-
-The goal is not only to build a functional application, but also to simulate a professional software development process using industry best practices.
-
-Throughout its development, the project will include:
-
-- Software Documentation
-- Requirements Engineering
-- UML Modeling
-- Version Control with Git and GitHub
-- Incremental Development
-- Responsive Web Development
-- Future Artificial Intelligence Integration
-
----
-
-## 📈 Future Improvements
-
-- Flashcards
-- PDF Management
-- Study Summaries
-- Notifications
-- Desktop Version (Electron)
-- SQLite Database
-- AI-powered Study Assistant
-- Intelligent Study Recommendations
+No dependencies or build process are required for Version 1.
 
 ---
 
 ## 👩‍💻 Author
 
-Developed by **Ana Clara**.
+Developed by **Ana Clara Gomes de Andrade**, Software Engineering student.
 
-Software Engineering Student.
+- [GitHub](https://github.com/naclaragsd)
+- [LinkedIn](https://www.linkedin.com/in/anaclaragsd)

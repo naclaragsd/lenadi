@@ -28,6 +28,16 @@ The system was created for students of different educational levels who want to 
 
 ## Purpose
 
-The system will be developed incrementally. The first version focuses on the essential features, such as subject registration, task creation and management, and automatic tracking of study progress.
+Lenadi follows an incremental development approach. Version 1 delivers the essential features for organizing subjects and tasks, including task filtering, completion tracking, progress visualization, and local data persistence.
 
-Future versions will introduce more advanced features, including reminders, flashcards, study recommendations, PDF integration, classroom note management, and additional resources related to academic subjects.
+Version 2 is planned to transform Lenadi into a full-stack application by introducing user authentication, a backend API, and a relational database for persistent and user-specific data.
+
+Later versions may introduce PDF management, study summaries, Lenadi Chat, AI-powered recommendations, flashcards, statistics, and other intelligent study tools.
+
+For more details, see the [project roadmap](06-roadmap.md).
+
+## Use Case Diagram
+
+The following diagram presents the main interactions between the student and the features available in Lenadi Version 1.
+
+![Lenadi use case diagram](diagrams/use-case-diagram.png)
